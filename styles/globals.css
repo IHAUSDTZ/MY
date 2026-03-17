@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2D5A27;
+  --color-primary-dark: #1E3D1A;
+  --color-secondary: #4E3B31;
+  --color-secondary-light: #6D5344;
+  --color-accent: #F9A826;
+  --color-surface: #F9F7F2;
+}
+
+@utility btn {
+  @apply px-6 py-3 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-1;
+}
+
+@utility btn-primary {
+  @apply bg-primary text-white hover:bg-primary-dark shadow-lg hover:shadow-xl;
+}
+
+@utility btn-accent {
+  @apply bg-accent text-secondary hover:bg-white shadow-lg hover:shadow-xl;
+}
