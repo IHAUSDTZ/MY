@@ -19,9 +19,9 @@ export default function GetInvolved() {
 
     if (!form.current) return;
 
-    if (PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
+    if (!PUBLIC_KEY || PUBLIC_KEY.includes("YOUR_")) {
       setStatus("error");
-      setErrorMessage("Public Key is not configured. Please add your EmailJS Public Key.");
+      setErrorMessage("Public Key is not configured correctly.");
       return;
     }
 
