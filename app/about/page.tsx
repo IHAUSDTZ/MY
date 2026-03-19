@@ -46,12 +46,13 @@ export default function About() {
             <div className="md:w-1/2">
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary/10 rounded-[4rem] rotate-3"></div>
-                <div className="relative z-10 w-full max-w-md mx-auto aspect-[4/5] overflow-hidden rounded-[3rem] shadow-2xl">
+                <div className="relative z-10 w-full max-w-md mx-auto aspect-[4/5] min-h-[400px] overflow-hidden rounded-[3rem] shadow-2xl">
                   <Image 
                     src="/images/founder.png" 
                     alt="Founder of IHAUS" 
                     fill 
                     className="object-cover"
+                    priority
                   />
                 </div>
               </div>
