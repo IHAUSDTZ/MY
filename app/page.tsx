@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Briefcase, GraduationCap, Building2, ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -6,13 +7,17 @@ export default function Home() {
     <div className="flex flex-col">
       {/* 1. Hero Section */}
       <section className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
-        {/* Placeholder for rural hill background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center z-0" 
-          style={{ backgroundImage: "linear-gradient(rgba(45, 90, 39, 0.4), rgba(78, 59, 49, 0.4)), url('/images/homeImage.jpg')" }}
-          role="img"
-          aria-label="Rural hill village in Manipur"
-        ></div>
+        {/* rural hill background using next/image for automatic path handling */}
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/images/homeImage.jpg" 
+            alt="Rural hill village in Manipur" 
+            fill 
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-secondary/40 z-10"></div>
+        </div>
         
         <div className="relative z-20 container mx-auto px-6 max-w-4xl">
           <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-2xl">

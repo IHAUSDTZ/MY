@@ -1,5 +1,6 @@
 import { ArrowLeft, CheckCircle2, Download, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 const programsData: Record<string, any> = {
@@ -18,8 +19,8 @@ const programsData: Record<string, any> = {
       "Established a community-led handicraft cooperative."
     ],
     images: [
-      "https://images.unsplash.com/photo-1488459739019-19e53f178206?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80"
+      "/images/work1image.jpg",
+      "/images/work2image.jpg"
     ]
   },
   agriculture: {
@@ -37,8 +38,8 @@ const programsData: Record<string, any> = {
       "5,000+ saplings planted for watershed management."
     ],
     images: [
-      "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=800&q=80"
+      "/images/homeImage.jpg",
+      "/images/work1image.jpg"
     ]
   }
 };
@@ -114,8 +115,13 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
             </h2>
             <div className="grid gap-8">
               {program.images.map((img: string, idx: number) => (
-                <div key={idx} className="h-80 rounded-[4rem] overflow-hidden shadow-xl">
-                  <img src={img} alt={`${program.title} gallery ${idx}`} className="w-full h-full object-cover" />
+                <div key={idx} className="relative h-80 rounded-[4rem] overflow-hidden shadow-xl">
+                  <Image 
+                    src={img} 
+                    alt={`${program.title} gallery ${idx}`} 
+                    fill 
+                    className="object-cover" 
+                  />
                 </div>
               ))}
             </div>

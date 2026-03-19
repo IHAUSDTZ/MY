@@ -38,14 +38,16 @@ jobs:
           cache: "npm"
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        # with:
+        with:
           # Automatically inject basePath in your Next.js configuration file and propagate
           # it to next.config.js. This requires the use of the `basePath` property in next.config.js.
-          # static_site_generator: next
+          static_site_generator: next
       - name: Install dependencies
         run: npm install
       - name: Build with Next.js
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: "/NGO"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

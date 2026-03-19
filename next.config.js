@@ -4,9 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true, // Required for static export on GitHub Pages
   },
-  // If you're deploying to a custom domain, leave basePath as is.
-  // If you're deploying to username.github.io/repo-name/, set it to '/repo-name'
-  // basePath: '/NGO', 
+  // We handle basePath automatically via the GitHub Action but re-expose it here 
+  // to ensure next/image prepends it correctly in the static output.
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 };
 
 module.exports = nextConfig;

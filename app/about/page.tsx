@@ -1,4 +1,5 @@
 import { Target, Eye, History } from "lucide-react";
+import Image from "next/image";
 
 export const metadata = {
   title: "About Our Society",
@@ -45,11 +46,14 @@ export default function About() {
             <div className="md:w-1/2">
               <div className="relative">
                 <div className="absolute -inset-4 bg-primary/10 rounded-[4rem] rotate-3"></div>
-                <img 
-                  src="/images/founder.png" 
-                  alt="Founder of IHAUS" 
-                  className="relative z-10 rounded-[3rem] shadow-2xl w-full max-w-md mx-auto object-cover aspect-[4/5]"
-                />
+                <div className="relative z-10 w-full max-w-md mx-auto aspect-[4/5] overflow-hidden rounded-[3rem] shadow-2xl">
+                  <Image 
+                    src="/images/founder.png" 
+                    alt="Founder of IHAUS" 
+                    fill 
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
             <div className="md:w-1/2">

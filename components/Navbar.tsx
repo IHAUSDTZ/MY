@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Mountain } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
@@ -47,7 +48,14 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="flex items-center">
-          <img src="/images/logo.png" alt="IHAUS Logo" className="h-10 w-10 object-cover rounded-full mr-3 border-2 border-accent/20" />
+          <div className="relative h-10 w-10 mr-3">
+            <Image 
+              src="/images/logo.png" 
+              alt="IHAUS Logo" 
+              fill 
+              className="object-cover rounded-full border-2 border-accent/20" 
+            />
+          </div>
           <span className="text-white text-2xl font-bold">IHAUS</span>
         </Link>
 

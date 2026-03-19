@@ -1,5 +1,6 @@
 import { Calendar, Share2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata = {
   title: "News & Events",
@@ -49,8 +50,13 @@ export default function News() {
             {posts.map((post) => (
               <article key={post.id} className="bg-white rounded-[3rem] overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 flex flex-col h-full">
                 <div className="h-56 relative">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                  <div className="absolute top-6 left-6 bg-accent px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-secondary">
+                  <Image 
+                    src={post.image} 
+                    alt={post.title} 
+                    fill 
+                    className="object-cover" 
+                  />
+                  <div className="absolute top-6 left-6 bg-accent px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-secondary z-10">
                     {post.category}
                   </div>
                 </div>

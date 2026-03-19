@@ -40,11 +40,11 @@ npm run start
 - `/app`: Pages, layouts, and API routes (Next.js App Router).
 - `/components`: Modular UI components (Navbar, Footer, Program Cards).
 - `/styles`: Global CSS and Tailwind configurations.
-- `/public`: Static assets, `sitemap.xml`, and `robots.txt`.
-- `/assets`: Sample royalty-free images and brand assets.
+- `/public`: Static assets, including images, `sitemap.xml`, and `robots.txt`.
+- `/assets`: Original high-res source files (synced to `/public/images` for web use).
 
 ## Production Checklist (TODOs)
-1. **Assets**: Replace placeholder images in `public/` and `app/` with high-resolution community photos.
+1. **Assets**: All images from `assets/` have been moved to `public/images/` and are handled via `next/image`.
 2. **Analytics**: Add Google Analytics tracking ID in `app/layout.tsx`.
 3. **Payments**: Integrate a real payment provider (Stripe/Razorpay) in `app/donate/page.tsx`. Currently uses a UI stub.
 4. **CMS**: Connect `app/news/page.tsx` to a headless CMS (Contentful/Sanity) for dynamic updates.
