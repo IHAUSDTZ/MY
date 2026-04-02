@@ -4,6 +4,7 @@ import { join } from 'node:path';
 
 // Route segment config
 export const runtime = 'nodejs';
+export const dynamic = 'force-static';
 
 // Image metadata
 export const size = {

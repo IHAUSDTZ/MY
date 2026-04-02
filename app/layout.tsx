@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ihausmanipur.org'),
   title: {
     default: "IHAUS | Integrated Hill Areas Upliftment Society, Manipur",
     template: "%s | IHAUS Manipur"

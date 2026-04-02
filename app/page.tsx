@@ -16,7 +16,7 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/40 to-secondary/40 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-secondary/20 z-10"></div>
         </div>
         
         <div className="relative z-20 container mx-auto px-6 max-w-4xl">
@@ -104,7 +104,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="bg-secondary p-12 rounded-[4rem] text-white shadow-2xl relative overflow-hidden">
-            <MountainLogo className="absolute -bottom-20 -right-20 opacity-5 w-80 h-80" />
+            <MountainLogo className="absolute -bottom-20 -right-20 opacity-10 w-80 h-80" />
             <h3 className="text-3xl font-bold mb-6">Upcoming Initiatives</h3>
             <div className="space-y-6">
               <div className="pb-6 border-b border-white/10">
