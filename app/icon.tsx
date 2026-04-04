@@ -33,15 +33,15 @@ export default async function Icon() {
       >
         <div
           style={{
-            background: 'white',
-            width: '100%',
-            height: '100%',
+            width: '92%',
+            height: '92%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: '50%',
             overflow: 'hidden',
-            border: '1px solid rgba(249, 168, 38, 0.2)', // border-accent/20 from Navbar
+            border: '2px solid rgba(249, 168, 38, 0.6)',
+            background: 'transparent',
           }}
         >
           <img
@@ -49,7 +49,7 @@ export default async function Icon() {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
+              objectFit: 'contain',
             }}
             alt="IHAUS Logo"
           />

@@ -3,11 +3,16 @@ import { Inter } from "next/font/google";
 import "../styles/globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { ErrorBoundary } from "../components/ErrorBoundary";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
+import JsonLd from "../components/JsonLd";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://ihausmanipur.org";
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ihausmanipur.org'),
+  metadataBase: new URL(baseUrl),
   title: {
     default: "IHAUS | Integrated Hill Areas Upliftment Society, Manipur",
     template: "%s | IHAUS Manipur"
@@ -16,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "IHAUS Manipur",
     description: "Empowering Hill Communities for Sustainable Rural Development",
-    url: "https://ihausmanipur.org",
+    url: baseUrl,
     siteName: "IHAUS Manipur",
     images: [
       {
@@ -43,9 +48,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <ErrorBoundary>
+          <GoogleAnalytics />
+          <JsonLd />
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </ErrorBoundary>
       </body>
     </html>
   );

@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Building2, ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -20,17 +23,37 @@ export default function Home() {
         </div>
         
         <div className="relative z-20 container mx-auto px-6 max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-2xl">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-2xl"
+          >
             Integrated Hill Areas Upliftment Society (IHAUS)
-          </h1>
-          <p className="text-xl md:text-3xl mb-10 font-light opacity-95 italic max-w-2xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-xl md:text-3xl mb-10 font-light opacity-95 italic max-w-2xl mx-auto"
+          >
             “Empowering Hill Communities for Sustainable Rural Development”
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link href="/get-involved" className="btn btn-accent px-12 py-5 rounded-2xl text-xl shadow-2xl">
+          </motion.p>
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row justify-center gap-6"
+          >
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/get-involved"
+              className="btn btn-accent px-12 py-5 rounded-2xl text-xl shadow-2xl"
+            >
               Get Involved
-            </Link>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
@@ -42,46 +65,87 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold text-secondary leading-tight">Uplifting Manipur's Hill Communities</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            <div className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
-              <div className="bg-primary/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
-                <Briefcase className="text-primary group-hover:text-white w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Sustainable Livelihoods</h3>
+          <motion.div 
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="grid md:grid-cols-3 gap-10"
+          >
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-gray-100"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="bg-primary/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300"
+              >
+                <Briefcase className="text-primary w-8 h-8 transition-all duration-300" />
+              </motion.div>
+              <h3 className="text-2xl font-bold mb-4 transition-all duration-300">Sustainable Livelihoods</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Equipping local farmers and youth with organic agricultural practices and market linkages.
               </p>
-              <Link href="/programs" className="text-primary font-bold flex items-center hover:underline">
-                Learn more <ArrowRight size={18} className="ml-2" />
-              </Link>
-            </div>
-
-            <div className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
-              <div className="bg-primary/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
-                <GraduationCap className="text-primary group-hover:text-white w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Training & Education</h3>
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/programs"
+                className="text-primary font-bold flex items-center"
+              >
+                Learn more <ArrowRight size={18} className="ml-2 transition-all duration-200" />
+              </motion.a>
+            </motion.div>
+            
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-gray-100"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="bg-primary/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300"
+              >
+                <GraduationCap className="text-primary w-8 h-8 transition-all duration-300" />
+              </motion.div>
+              <h3 className="text-2xl font-bold mb-4 transition-all duration-300">Training & Education</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Intensive capacity building for youth and women to foster socio-economic independence.
               </p>
-              <Link href="/programs" className="text-primary font-bold flex items-center hover:underline">
-                Learn more <ArrowRight size={18} className="ml-2" />
-              </Link>
-            </div>
-
-            <div className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
-              <div className="bg-primary/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-primary group-hover:text-white transition-colors">
-                <Building2 className="text-primary group-hover:text-white w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Community Infrastructure</h3>
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/programs"
+                className="text-primary font-bold flex items-center"
+              >
+                Learn more <ArrowRight size={18} className="ml-2 transition-all duration-200" />
+              </motion.a>
+            </motion.div>
+            
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-gray-100"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="bg-primary/5 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-all duration-300"
+              >
+                <Building2 className="text-primary w-8 h-8 transition-all duration-300" />
+              </motion.div>
+              <h3 className="text-2xl font-bold mb-4 transition-all duration-300">Community Infrastructure</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Improving rural roads, water access, and sanitation facilities in remote hamlets.
               </p>
-              <Link href="/programs" className="text-primary font-bold flex items-center hover:underline">
-                Learn more <ArrowRight size={18} className="ml-2" />
-              </Link>
-            </div>
-          </div>
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/programs"
+                className="text-primary font-bold flex items-center"
+              >
+                Learn more <ArrowRight size={18} className="ml-2 transition-all duration-200" />
+              </motion.a>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -99,9 +163,14 @@ export default function Home() {
                 <p className="text-gray-600">Be part of our inaugural projects as we work to empower the first of many villages in the Khoupum area.</p>
               </div>
             </div>
-            <Link href="/get-involved" className="btn btn-primary px-10">
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/get-involved"
+              className="btn btn-primary px-10"
+            >
               Get Involved Today
-            </Link>
+            </motion.a>
           </div>
           <div className="bg-secondary p-12 rounded-[4rem] text-white shadow-2xl relative overflow-hidden">
             <MountainLogo className="absolute -bottom-20 -right-20 opacity-10 w-80 h-80" />

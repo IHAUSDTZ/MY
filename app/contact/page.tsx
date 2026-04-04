@@ -1,34 +1,56 @@
 "use client";
+
 import { useState, useRef, FormEvent } from "react";
 import { MapPin, Mail, Phone, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { contactFormSchema } from "@/lib/validations";
+import type { ZodError } from "zod";
 
-// Note: In a production environment, you should use environment variables for keys.
-// Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key.
-const SERVICE_ID = "service_rinb7pi";
-const TEMPLATE_ID = "template_vh4kfll";
-const PUBLIC_KEY = "6NMbf23hFLlnvZBSH"; // Public key from EmailJS dashboard
+export const dynamic = "force-dynamic";
+
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_rinb7pi";
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_vh4kfll";
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
 
 export default function Contact() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const sendEmail = (e: FormEvent) => {
     e.preventDefault();
 
     if (!form.current) return;
 
-    // Use runtime check for actual key value instead of unreachable literal comparison
+    const formData = new FormData(form.current);
+    const data = Object.fromEntries(formData.entries());
+
+    const validation = contactFormSchema.safeParse(data);
+
+    if (!validation.success) {
+      const errors: Record<string, string> = {};
+      validation.error.issues.forEach((issue: ZodError["issues"][number]) => {
+        if (issue.path[0]) {
+          errors[issue.path[0] as string] = issue.message;
+        }
+      });
+      setFieldErrors(errors);
+      setStatus("error");
+      setErrorMessage("Please fix the errors below.");
+      return;
+    }
+
+    setFieldErrors({});
+
     if (!PUBLIC_KEY || PUBLIC_KEY.includes("YOUR_")) {
       setStatus("error");
-      setErrorMessage("Public Key is not configured correctly.");
+      setErrorMessage("EmailJS is not configured correctly. Please contact the administrator.");
       return;
     }
 
     setStatus("sending");
 
-    // Initialize EmailJS with Public Key
     emailjs.init(PUBLIC_KEY);
 
     emailjs
@@ -39,26 +61,26 @@ export default function Contact() {
           form.current?.reset();
         },
         (error) => {
-          // EmailJS errors often have a 'text' property
           const errorText = error?.text || error?.message || "Unknown error";
           console.error("EmailJS Full Error Object:", error);
           console.error("EmailJS Error Text:", errorText);
           
           setStatus("error");
-          setErrorMessage(`Failed to send: ${errorText}. Please check your EmailJS dashboard configuration.`);
+          setErrorMessage(`Failed to send: ${errorText}. Please try again later.`);
         }
       );
   };
 
+  const inputClasses = "w-full bg-surface p-5 rounded-2xl border-none focus:ring-2 focus:ring-primary/50";
+  const errorClasses = "border-2 border-red-500 focus:ring-2 focus:ring-red-500/50";
+
   return (
     <div className="pt-32 flex flex-col">
-      {/* Header */}
       <section className="bg-primary text-white py-20 px-6 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">Connect with Us</h1>
         <p className="text-xl opacity-80 max-w-2xl mx-auto font-light">We welcome partnerships, volunteers, and inquiries from all who share our vision for the hills.</p>
       </section>
 
-      {/* Contact Content */}
       <section className="py-24 bg-surface">
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16">
           <div className="space-y-12">
@@ -128,45 +150,55 @@ export default function Contact() {
                   <input 
                     name="user_name"
                     type="text" 
-                    required
                     placeholder="Your Name" 
-                    className="w-full bg-surface p-5 rounded-2xl border-none focus:ring-2 focus:ring-primary/50" 
+                    className={`${inputClasses} ${fieldErrors.user_name ? errorClasses : ""}`}
                   />
+                  {fieldErrors.user_name && (
+                    <p className="text-red-600 text-sm ml-2">{fieldErrors.user_name}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold opacity-40 ml-2">Email Address</label>
                   <input 
                     name="user_email"
                     type="email" 
-                    required
                     placeholder="email@example.com" 
-                    className="w-full bg-surface p-5 rounded-2xl border-none focus:ring-2 focus:ring-primary/50" 
+                    className={`${inputClasses} ${fieldErrors.user_email ? errorClasses : ""}`}
                   />
+                  {fieldErrors.user_email && (
+                    <p className="text-red-600 text-sm ml-2">{fieldErrors.user_email}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold opacity-40 ml-2">Subject</label>
                   <select 
                     name="subject"
-                    className="w-full bg-surface p-5 rounded-2xl border-none focus:ring-2 focus:ring-primary/50"
+                    className={`${inputClasses} ${fieldErrors.subject ? errorClasses : ""}`}
                   >
+                    <option value="">Select a subject</option>
                     <option>General Inquiry</option>
                     <option>Volunteer Opportunity</option>
                     <option>Partnership Proposal</option>
                     <option>Donation Question</option>
                   </select>
+                  {fieldErrors.subject && (
+                    <p className="text-red-600 text-sm ml-2">{fieldErrors.subject}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold opacity-40 ml-2">Message</label>
                   <textarea 
                     name="message"
                     rows={5} 
-                    required
                     placeholder="How can we help you?" 
-                    className="w-full bg-surface p-5 rounded-2xl border-none focus:ring-2 focus:ring-primary/50"
+                    className={`${inputClasses} ${fieldErrors.message ? errorClasses : ""}`}
                   ></textarea>
+                  {fieldErrors.message && (
+                    <p className="text-red-600 text-sm ml-2">{fieldErrors.message}</p>
+                  )}
                 </div>
 
-                {status === "error" && (
+                {status === "error" && !Object.keys(fieldErrors).length && (
                   <div className="flex items-center text-red-600 bg-red-50 p-4 rounded-xl text-sm">
                     <AlertCircle size={18} className="mr-2" />
                     {errorMessage}
