@@ -3,22 +3,38 @@
 @theme {
   --color-primary: #2D5A27;
   --color-primary-dark: #1E3D1A;
+  --color-primary-600: #2D5A27;
   --color-secondary: #4E3B31;
   --color-secondary-light: #6D5344;
+  --color-secondary-900: #4E3B31;
   --color-accent: #F9A826;
   --color-surface: #F9F7F2;
+  --color-steel-50: #F9F7F2;
+  --color-steel-100: #E5E7EB;
+  --color-steel-800: #374151;
+  --color-steel-900: #4E3B31;
+  
+  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 @utility btn {
-  @apply px-6 py-3 rounded-xl font-bold transition-all duration-300 transform hover:-translate-y-1;
+  @apply px-6 py-3 rounded-2xl font-black transition-all duration-300 transform hover:-translate-y-1 active:scale-95;
 }
 
 @utility btn-primary {
-  @apply bg-primary text-white hover:bg-primary-dark shadow-lg hover:shadow-xl;
+  @apply bg-primary-600 text-white hover:bg-primary-dark shadow-xl hover:shadow-2xl;
 }
 
 @utility btn-accent {
-  @apply bg-accent text-secondary hover:bg-white shadow-lg hover:shadow-xl;
+  @apply bg-accent text-secondary-900 hover:bg-white shadow-xl hover:shadow-2xl border border-transparent hover:border-accent;
+}
+
+@utility glass {
+  @apply backdrop-blur-md bg-white/70 border-b border-white/20;
+}
+
+@utility glass-dark {
+  @apply backdrop-blur-md bg-secondary-900/80 border-b border-white/10;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

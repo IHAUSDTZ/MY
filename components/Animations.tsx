@@ -1,83 +1,60 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants, type Transition } from "framer-motion";
 
-interface FadeInProps {
+interface AnimatedProps {
   children: React.ReactNode;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right";
-  duration?: number;
   className?: string;
+  [key: string]: any;
 }
 
-export function FadeIn({ 
+export function AnimatedSection({ 
   children, 
-  delay = 0, 
-  direction = "up",
-  duration = 0.6,
-  className 
-}: FadeInProps) {
-  const directions = {
-    up: { y: 50, x: 0 },
-    down: { y: -50, x: 0 },
-    left: { x: 50, y: 0 },
-    right: { x: -50, y: 0 },
-  };
-
+  initial, 
+  animate, 
+  transition,
+  className,
+  ...props 
+}: any) {
   return (
-    <motion.div
-      initial={{ 
-        opacity: 0, 
-        ...directions[direction] 
-      }}
-      animate={{ 
-        opacity: 1, 
-        x: 0, 
-        y: 0 
-      }}
-      transition={{ 
-        duration, 
-        delay, 
-        ease: "easeOut" 
-      }}
+    <motion.div 
+      initial={initial || { y: 50, opacity: 0 }}
+      whileInView={animate || { y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={transition || { duration: 0.6, ease: "easeOut" }}
       className={className}
+      {...props}
     >
       {children}
     </motion.div>
   );
 }
 
-interface FadeInHeadingProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function FadeInHeading({ children, className }: FadeInHeadingProps) {
+export function AnimatedHeading({ children, delay = 0, className, ...props }: AnimatedProps) {
   return (
     <motion.h1
       initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
       className={className}
+      {...props}
     >
       {children}
     </motion.h1>
   );
 }
 
-interface FadeInTextProps {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}
-
-export function FadeInText({ children, className, delay = 0.2 }: FadeInTextProps) {
+export function AnimatedText({ children, delay = 0, className, ...props }: AnimatedProps) {
   return (
     <motion.p
       initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.8, delay, ease: "easeOut" }}
       className={className}
+      {...props}
     >
       {children}
     </motion.p>
